@@ -1,0 +1,21 @@
+#encoding: cp866
+base ={}                                   #определяем пустой хэш
+
+loop do                                    #определяем цикл для бесконечного ввода
+puts "Enter name:"
+n = gets.to_s.strip.capitalize             #определяем переменную n, в которой хранится имя
+
+	if n == ""                         #задаём условие прекращения цикла
+	break
+	end
+
+puts "Enter phone number:"
+number = gets.to_i                         #определяем переменную number, в которой хранится телефонный номер
+
+base[n] = number                           #добавляем значения переменный n и number в хэш
+end
+
+base.each do |n, number|                   #определям метод each для хэша base с переменными n и number
+puts "#{n}, #{number}"                     #выводим значения n и number для каждого из элементов хэш-таблицы
+end
+

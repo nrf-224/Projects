@@ -1,0 +1,54 @@
+#encoding: cp866
+class Airplane                                #создаём класс Airplane
+
+	attr_reader :model                   #делаем доступной для чтения переменную model
+	attr_reader :altitude                #делаем доступной для чтения переменную altitude
+	attr_reader :speed                   #делаем доступной для чтения переменную speed
+	
+	def initialize(model)                #создаём метод initialize с изменяемым параметром model
+	@model = model                       #присваиваем значение переменной model параметру model из метода initialize
+	@altitude = 0                        #присваиваем значение переменной altitude
+	@speed = 0                           #присваиваем значение переменной speed
+	end                                  #окончание метода
+
+	def fly_boeing                       #создаём метод fly_boeing с параметрами полёта Боинга
+	@speed = 800                         #присваиваем переменной speed значение 800
+	@altitude = 10000                    #присваиваем переменной altitude значение 10000
+	end                                  #окончание метода
+
+	def fly_airbus
+	@speed = 850
+	@altitude = 10500
+	end
+
+	def land
+	@speed = 0
+	@altitude = 0
+	end
+
+	def moving?                          #создаём метод, выводящий значение true или false (понятно по ? в конце названия метода)
+	return @speed >0	             #сравниваем значение скорости с нулём, возвращаем значение true, если speed >0 и false, если speed <= 0
+	end                                  #окончание метода
+
+end
+
+plane1 = Airplane.new('Boeing 777')
+puts "Model #{plane1.model}, speed #{plane1.speed}, altitude #{plane1.altitude}, moving? #{plane1.moving?}"
+
+plane1.fly_boeing
+puts "Model #{plane1.model}, speed #{plane1.speed}, altitude #{plane1.altitude}, moving? #{plane1.moving?}"
+
+plane1.land
+puts "Model #{plane1.model}, speed #{plane1.speed}, altitude #{plane1.altitude}, moving? #{plane1.moving?}"
+
+
+puts
+
+plane2 = Airplane.new('Airbus A320')
+puts "Model #{plane2.model}, speed #{plane2.speed}, altitude #{plane2.altitude}, moving? #{plane2.moving?}"
+
+plane2.fly_airbus
+puts "Model #{plane2.model}, speed #{plane2.speed}, altitude #{plane2.altitude}, moving? #{plane2.moving?}"
+
+plane2.land
+puts "Model #{plane2.model}, speed #{plane2.speed}, altitude #{plane2.altitude}, moving? #{plane2.moving?}"

@@ -1,0 +1,56 @@
+<!DOCTYPE html> <!-- указание на то, что веб-страница является страницей HTML 5 -->
+<html> <!-- открытие документа html -->
+	<head> <!-- открытие заголовка веб-страницы -->
+		<title>Студия веб-дизайна «Я веган»</title> <!-- заголовок веб-страницы -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- мета-данные для поисковых систем и браузеров -->
+		<!-- Bootstrap -->
+		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> <!-- ссылка на внешний css-файл. В данном случае - css Bootstrap -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    	<script src="/vendor/jquery-1.9.1.min.js"></script>
+   		<!-- Include all compiled plugins (below), or include individual files as needed -->
+   		<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+ 		<script type="text/javascript" src="/scripts.js"></script>
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+	</head> <!-- закрытие заголовка веб-страницы -->
+	<body> <!-- открытие основной части веб-страницы -->
+		<div class="container"> <!-- открытие блока div и присвоение этому блоку класса css container -->
+
+			<!-- Static navbar -->
+			<nav class="navbar navbar-default" role="navigation"> <!-- открытие блока навигации, присвоение этому блоку класса и роли css -->
+			  <div class="navbar-header"> <!-- открытие блока div и присвоение блоку класса header -->
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			      <span class="sr-only">Toggle navigation</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="/">Простыня</a>
+			  </div>
+			  <div class="navbar-collapse collapse">
+			    <ul class="nav navbar-nav">
+			      <li><a href="/order">Заказать дизайн</a></li>
+			      <li><a href="/contacts">Контакты</a></li>
+			      <li><a href="/about">О нас</a></li>
+			    </ul>
+			  </div><!--/.nav-collapse -->
+			</nav>
+
+			<div>
+			      <%if @error && @error.length > 0 then %>
+			          <div class="alert alert-danger"><%=@error%></div>
+			      <% end %>
+			      <%= yield %>
+			</div>
+
+	</div>
+
+
+
+  </body>
+</html>

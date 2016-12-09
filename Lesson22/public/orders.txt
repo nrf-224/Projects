@@ -1,0 +1,6 @@
+User: Дмитрий, phone: 222-444, date and time: 08.12.2016 в 13:00
+User: , phone: , date and time: 
+User: Дима, phone: 78-95, date and time: 09.12.2016 в 14:00
+User: Дима, phone: 78-95, date and time: 09.12.2016 в 14:00
+User: Михаил, phone: 44-66, date and time: 10.12.2016 в 15:00, designer 
+User: Василий, phone: 66-99, date and time: 09.12.2016 в 15:00, designer Михаил Ступоров

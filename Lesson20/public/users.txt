@@ -1,0 +1,2 @@
+User: Grigoriy, phone: 11-22-33, date and time: 12.12.2016 at 08:00
+User: Vasile, phone: 22-33-44, date and time: 12.12.2016 at 09:00
