@@ -1,6 +1,7 @@
 puts "Enter number:"
 n = gets.to_i
-puts " Enter quantity of array elements:"
+puts "Enter quantity of array elements:"
 m = gets.to_i
-m = m + 1
+n = n + 1
 
+puts "Time of work is #{n*m}"
