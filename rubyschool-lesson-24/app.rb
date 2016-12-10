@@ -29,6 +29,18 @@ post '/visit' do #начало метода, выполняемого при pos
 			:datetime => 'Введите дату и время' } #определяем хеш hh. В данном случае ключ - отсутствующий параметр при вводе, а сообщение - указание, какой параметр надо ввести.
 			#В хеше указаны только необходимые параметры
 
+	@error = hh.select {|key,_| params[key] == ""}.values.join(", ") #определяем переменную error
+	#в переменную error передаётся еретический код, который мне не до конца понятен
+
+	if @error != '' #если сообщение об ошибке не пустое
+		return erb :visit #вместо return можно было бы использовать метод redirect, но при этом не сохранялись бы введёные в поля формы значения
+	end #
+
+	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}" #
+
+end #
+
+=begin
 	hh.each do |key, value| #определяем цикл each со внутренними переменными key, value, который выполнит с каждым элементом массива действия, описанные в коде ниже
 		if params[key] == '' #если ключ пустой, то переменной error присваивается сообщение об ошибке, соответствующеее данному ключу
 			@error = hh[key]
@@ -36,18 +48,7 @@ post '/visit' do #начало метода, выполняемого при pos
 		return erb :visit
 		end
 	end
-	
+
 	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
-=begin
-	@error = hh.select {|key,_| params[key] == ""}.values.join(", ") #определяем переменную error
-	#в п
-
-	if @error != '' #
-		return erb :visit #
-	end #
-
-	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}" #
-
-end #
 =end
