@@ -1,6 +1,7 @@
 require 'rubygems' #вызов гема rubygems
 require 'sinatra' #вызов гема sinatra
 require 'sinatra/reloader' #вызов гема sinatra reloader
+require 'pony'
 
 get '/' do #начало метода, выполняемого при get-запросе к корневой странице сайта
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"
@@ -14,6 +15,10 @@ end #окончание метода
 get '/visit' do #начало метода, выполняемого при get-запросе к странице сайта visit
 	erb :visit #вызов метода erb со ссылкой на страницу visit.erb
 end #окончание метода
+
+get '/contacts' do
+	erb :contacts
+end
 
 post '/visit' do #начало метода, выполняемого при post-запросе, отправляемом со страницы visit
 
@@ -39,6 +44,17 @@ post '/visit' do #начало метода, выполняемого при pos
 	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}" #
 
 end #
+
+post '/contacts' do
+        name = params[:mailname]
+        mail = params[:mailad]
+        body = params[:message]
+
+        Pony.mail(:to => 'nuklearbomb@yandex.ru', :from => "#{mail}", :subject => "Message from #{name}", :body => "#{body}")
+end
+
+
+
 
 =begin
 	hh.each do |key, value| #определяем цикл each со внутренними переменными key, value, который выполнит с каждым элементом массива действия, описанные в коде ниже
