@@ -20,6 +20,32 @@ get '/contacts' do
 	erb :contacts
 end
 
+
+post '/visit' do
+
+	@username = params[:username]
+	@phone = params[:phone]
+	@datetime = params[:datetime]
+	@barber = params[:barber]
+	@color = params[:color]
+
+hh = {     :username => 'Введите имя',
+		   :phone => 'Введите телефон',
+           :datetime => 'Введите дату и время' }
+
+ @error = hh.select {|key,_| params[key] == ""}.values.join(", ")
+
+	if @error != ''
+      return erb :visit
+	end
+erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+end
+
+
+
+
+=begin
+
 post '/visit' do #начало метода, выполняемого при post-запросе, отправляемом со страницы visit
 
 	@username = params[:username] #определение переменной метода @username и присвоение ей значения,взятое из хеша params
@@ -32,7 +58,6 @@ post '/visit' do #начало метода, выполняемого при pos
 	# хеш. Задача кода ниже - проверка того, что пользователь заполнил все обязательные поля. Если заполнены не все поля, то программа укажет, какие именно данные осталось указать
 
 
-=begin
 	hh = { 	:username => 'Введите имя',
 			:phone => 'Введите телефон',
 			:datetime => 'Введите дату и время' } #определяем хеш hh. В данном случае ключ - отсутствующий параметр при вводе, а сообщение - указание, какой параметр надо ввести.
@@ -47,7 +72,7 @@ post '/visit' do #начало метода, выполняемого при pos
 
 	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
-=end
+
 
 	# хеш. Задача кода ниже - проверка того, что пользователь заполнил все обязательные поля. Если заполнены не все поля, то программа укажет, какие именно данные осталось указать
 	hh = { 	:username => 'Введите имя',
@@ -72,3 +97,4 @@ post '/contacts' do
 
         Pony.mail(:to => 'nuklearbomb@yandex.ru', :from => "#{mail}", :subject => "Message from #{name}", :body => "#{body}")
 end
+=end
