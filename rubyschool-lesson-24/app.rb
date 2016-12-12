@@ -3,9 +3,16 @@ require 'sinatra' #вызов гема sinatra
 require 'sinatra/reloader' #вызов гема sinatra reloader
 require 'sqlite3'
 
+def get_db
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
+end
+
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS "Users" 
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS
+		"Users" 
 		(
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
 			"username" TEXT, 
@@ -52,6 +59,20 @@ hh = {     :username => 'Введите имя',
 	if @error != ''
       return erb :visit
 	end
+
+db = get_db
+db.execute 'insert into 
+				Users 
+				(
+				username, 
+				phone, 
+				datestamp, 
+				barber, 
+				color
+				)
+
+				values ( ?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+
 erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 
