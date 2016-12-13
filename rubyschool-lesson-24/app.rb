@@ -77,8 +77,6 @@ erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color
 end
 
 
-
-
 =begin
 
 post '/visit' do #начало метода, выполняемого при post-запросе, отправляемом со страницы visit
