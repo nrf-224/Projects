@@ -7,7 +7,6 @@ loop do
 	break
 	end
 end
-
 puts n
 end
 
