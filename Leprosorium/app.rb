@@ -18,8 +18,8 @@ configure do
 	@db.execute 'CREATE  TABLE IF NOT EXISTS Posts
 	(
 		Id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, 
-		created_date DATETIME NOT NULL, 
-		content TEXT NOT NULL 
+		created_date DATE, 
+		content TEXT
 	)'
 end
 
@@ -38,6 +38,7 @@ post '/new' do
 		return erb :new
 	end
 
+	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [@content]
 
 	erb "You typed #{@content}"
 
