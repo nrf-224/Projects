@@ -13,6 +13,16 @@ before do
 	init_db
 end
 
+configure do
+	init_db
+	@db.execute 'CREATE  TABLE IF NOT EXISTS Posts
+	(
+		Id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE, 
+		created_date DATETIME NOT NULL, 
+		content TEXT NOT NULL 
+	)'
+end
+
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
 end
@@ -23,6 +33,11 @@ end
 
 post '/new' do
 	@content  = params[:content]
+	if @content.length <= 0
+		@error = "Введите текст поста"
+		return erb :new
+	end
+
 
 	erb "You typed #{@content}"
 
