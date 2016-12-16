@@ -15,6 +15,7 @@
 <% @comments.each do |comment| %>
 	<p>
 		<%= comment['content'] %><br />
+		<br />
 		<%= comment['created_date'] %>
 		<br />
 	</p>
@@ -24,7 +25,7 @@
 <h4>Добавить комментарий:</h4>
 <form action = "/details/<%= @post_id %>" method = "POST" role = "form">
   <div class="form-group">
-  <textarea class="form-control" name ="content" rows="10" placeholder = "Текст комментария"></textarea>
+  <textarea class="form-control" name ="content" rows="3" placeholder = "Текст комментария"></textarea>
   <br />
   <button type="submit" class="btn btn-primary">Добавить</button>
 </form>

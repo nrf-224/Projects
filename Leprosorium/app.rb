@@ -47,14 +47,14 @@ erb :new	#выводим на экран страницу new.erb
 end
 
 post '/new' do #определяем метод post, выполняемый при отправке post-запроса к странице /new
-	@content  = params[:content]
-	@title = params[:title]
-	if @content.length <= 0 
-		@error = "Введите текст поста"
-		return erb :new
-	end
+	content  = params[:content] #определяем переменную content, в которую передаются данные из поля content на странице new.erb
+	title = params[:title] #определяем переменную title, в которую передаются данные из поля title на странице new.erb
+	if content.length <= 0 #выполняем проверку, в случае если в поле content ничего не введено, то выводится сообщение об ошибке
+		@error = "Введите текст поста" #сообщение об ошибке
+		return erb :new #возвращаем на экран страницу new.erb
+	end #закрытие end
 
-	@db.execute 'insert into Posts (content, created_date, title) values (?, datetime(), ?)', [@content, @title]
+	@db.execute 'insert into Posts (content, created_date, title) values (?, datetime(), ?)', [content, title]
 
 	redirect to '/'
 
