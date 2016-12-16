@@ -1,14 +1,25 @@
 <h4>Пост</h4>
 <br />
-<p>
+	<p>
 		<%= @row['content'] %>
 		<br />
 		<br />
-		Added at <%= @row['created_date'] %>
+		Дата создания: <%= @row['created_date'] %>
 		<br />
 	</p>
 <br />
 <h4>Комментарии:</h4>
+	<hr />
+<% @comments.each do |comment| %>
+	<p>
+		<%= comment['content'] %><br />
+		<%= comment['created_date'] %>
+		<br />
+	</p>
+	<hr />
+
+<% end %>
+<h4>Добавить комментарий:</h4>
 <form action = "/details/<%= @post_id %>" method = "POST" role = "form">
   <div class="form-group">
   <textarea class="form-control" name ="content" rows="10" placeholder = "Текст комментария"></textarea>

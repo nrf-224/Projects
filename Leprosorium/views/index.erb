@@ -1,8 +1,9 @@
-<h2>Свежее</h2>
+<h3>Свежее</h3>
 <br />
 <% @results.each do |post| %>
 	<p>
 		<%= post['content'] %>
+		<br />
 		<br />
 		<a href = "/details/<%= post['Id'] %>">Comments</a> | <%= post['created_date'] %>
 		<br />
