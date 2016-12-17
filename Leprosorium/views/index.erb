@@ -1,15 +1,16 @@
-<h3>Свежее</h3>
-<br />
-<% @results.each do |post| %>
-	<p>
-		<b><%= post['title'] %></b><br />
-		<br />
-		<%= post['content'] %>
-		<br />
-		<br />
-		<a href = "/details/<%= post['Id'] %>">Comments</a> | <%= post['created_date'] %>
-		<br />
-	</p>
-	<hr />
+ <!-- Данная страница отображает -->
+<h3>Свежее</h3> <!-- -->
+<br /> <!-- -->
+<% @results.each do |post| %> <!-- -->
+	<p> <!-- -->
+		<b><%= post['title'] %></b><br /> <!-- -->
+		<br /> <!-- -->
+		<%= post['content'] %> <!-- -->
+		<br /> <!-- -->
+		<br /> <!-- -->
+		<a href = "/details/<%= post['Id'] %>">Comments</a> | <%= post['created_date'] %> <!-- -->
+		<br /> <!-- -->
+	</p> <!-- -->
+	<hr /> <!-- -->
 
-<% end %>
+<% end %> <!-- -->
