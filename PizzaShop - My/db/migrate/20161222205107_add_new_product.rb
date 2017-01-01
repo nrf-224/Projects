@@ -1,6 +1,6 @@
 class AddNewProduct < ActiveRecord::Migration
 	def change
-	Product.create {
+	Product.create ({
 		:title => 'Sea', 
 		:description => 'This is Sea pizza', 
 		:price => 300, 
@@ -8,6 +8,6 @@ class AddNewProduct < ActiveRecord::Migration
 		:is_spicy => false, 
 		:is_veg => false, 
 		:is_best_offer => true, 
-		:path_to_image => '/images/sea.png' } 
+		:path_to_image => '/images/sea.png' }) 
 	end
 end
