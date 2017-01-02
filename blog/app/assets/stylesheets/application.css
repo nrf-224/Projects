@@ -1,3 +1,11 @@
+.field_with_errors input {
+	border-color: red;
+}
+
+.field_with_errors textarea {
+	border-color: red;
+}
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
