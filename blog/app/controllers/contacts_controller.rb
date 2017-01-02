@@ -4,7 +4,11 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params) #создаём переменную @contact и передаём в неё заполненные данные формы со страницы Contacts
-    @contact.save
+    if @contact.valid?
+      @contact.save
+    else
+    render action: 'new'
+    end
   end
 
   private
