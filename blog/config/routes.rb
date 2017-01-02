@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get '/' => 'home#index'
 
-  resource :contacts, only: [:new, :create] #создаём маршрут к странице contacts и указываем, что будем использовать только REST-методы new (get) и create (postc)
+  #get 'contacts' => 'contacts#new'
+  #resource :contacts, only: [:create] 
+  resource :contacts, only: [:new, :create], path_names: { :new => '' } #создаём маршрут к странице contacts и указываем, что будем использовать только REST-методы new (get) и create (post), а так же путь к new
   resources :articles
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
