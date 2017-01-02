@@ -3,10 +3,14 @@
 <% @articles.each do |article| %>
 
 <h3>
-<%= article.title %>
+	<%= article.title %>
 </h3>
 <p>
-<%= article.text %>
+	<%= article.text %>
+</p>
+
+<p>
+	<%= link_to 'Show', article_path(article) %> | <%= link_to 'Edit', edit_article_path(article) %>
 </p>
 
 <hr />
