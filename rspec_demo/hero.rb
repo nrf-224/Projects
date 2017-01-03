@@ -21,7 +21,9 @@ class Hero
   end
 end
 
+=begin
 hero = Hero.new 'mike'
 puts hero.name
 
 puts hero.hero_info
+=end
