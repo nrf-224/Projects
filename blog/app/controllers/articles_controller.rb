@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   
   def index
-    @articles = Article.all
+    @articles = Article.all.order id: :desc
   end
 
   def show
@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params) #создаём переменную @contact и передаём в неё заполненные данные формы со страницы Contacts
     if @article.save
-      redirect_to @article
+      redirect_to articles_path
       else
       render action: 'new'
     end
@@ -31,6 +31,13 @@ class ArticlesController < ApplicationController
       else
       render action: 'edit'
     end 
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to articles_path
   end
 
   private
