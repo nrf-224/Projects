@@ -12,7 +12,7 @@
 
   	<% if user_signed_in? %>
 
-  	<%= link_to 'Sign out', destroy_user_session_path, method: :delete %><br /> <!-- создание ссылки sign out, используя автоматически сгенерированные пути -->
+  	You logged as <%= current_user.email %> | <%= link_to 'Sign out', destroy_user_session_path, method: :delete %><br /> <!-- создание ссылки sign out, используя автоматически сгенерированные пути -->
 	<a href="/users/sign_out" data-method="delete">Sign out (hard coded)</a>
 
   	<% else %>
