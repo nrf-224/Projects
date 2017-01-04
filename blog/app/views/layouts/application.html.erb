@@ -10,8 +10,11 @@
 
   <body>
 
-	<a href="/users/sign_in">Sign in</a> | 
-	<a href="/users/sign_out" data-method="delete">Sign out</a>
+  	<%= link_to 'Sign in', new_user_session_path %> | <!-- создание ссылки sign in, используя автоматически сгенерированные пути -->
+  	<%= link_to 'Sign out', destroy_user_session_path, method: :delete %> <!-- создание ссылки sign out, используя автоматически сгенерированные пути -->
+  	<br/>
+	<a href="/users/sign_in">Sign in (hard coded)</a> | 
+	<a href="/users/sign_out" data-method="delete">Sign out (hard coded)</a>
 
    	<p class="notice"><%= notice %></p>
    	<p class="alert"><%= alert %></p>
