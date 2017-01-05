@@ -1,0 +1,27 @@
+<% @articles.each do |article| %>
+
+<h3><%= article.title %></h3>
+
+<p>
+	<%= article.text %>
+
+<br />
+<br />
+<i>Create <%= article.author %> at <%= article.created_at %></i>
+<hr/>
+</p>
+
+<p>
+	<%= link_to 'Show', article_path(article) %>
+	<% if user_signed_in? %>
+		<% if article.author == current_user.username %>|
+			<%= link_to 'Edit', edit_article_path(article) %> |
+			<%= link_to 'Destroy', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %>
+		<% end %>
+	<% end %>
+</p>
+
+<hr />
+
+<% end %>
+

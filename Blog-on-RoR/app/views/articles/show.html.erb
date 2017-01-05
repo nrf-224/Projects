@@ -1,0 +1,43 @@
+<h3><%= @article.title %></h3>
+<p>
+	<%= @article.text %>
+	<br />
+	<br />
+	<i>Create <%= @article.author %> at <%= @article.created_at %></i>
+	<hr/>
+</p>
+
+<h4>Comments</h4>
+
+<% @article.comments.each do |comment| %>
+
+	<p>
+		<%= comment.body %>
+		<br />
+		<br />
+		<i>Said <%= comment.author %> at <%= comment.created_at %></i>
+		<hr/>
+	</p>
+
+<% end %>
+
+<% if user_signed_in? %>
+	<h4>Add comment</h4>
+
+	<p>
+		<%= form_for([@article, @article.comments.build]) do |f| %>
+
+			<p>
+				<%= f.text_area :body, class: "form-control", rows: "4", style: "width: 300px" %>
+			</p>
+
+			<p>
+				<%= f.submit"Add", class: "btn btn-success" %>
+			</p>
+		<% end %>
+	</p>
+
+<% else %>
+	<i>Please <%= link_to "sign in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to leave comments.</i>
+<% end %>
+<hr/>
