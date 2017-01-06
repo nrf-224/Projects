@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,8 +9,42 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-  	<body class='<%= controller.controller_name %>'>
+  <body class='<%= controller.controller_name %>'>
     <%= yield %>
   </body>
+</html>
+-->
+
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<title>Depot Books Online Store</title> 
+		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %> 
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %> 
+		<%= csrf_meta_tag %> 
+	</head> 
+
+	<body class="<%= controller.controller_name %>"> 
+		<div id="banner"> 
+			<%= image_tag("logo.png") %>
+			<br />
+			<%= @page_title || "Pragmatic Bookshelf" %> 
+		</div> 
+
+		<div id="columns">
+			<div id="side"> 
+				<ul> 
+				<li><a href="http://www....">Home</a></li> 
+				<li><a href="http://www..../faq">Questions</a></li> 
+				<li><a href="http://www..../news">News</a></li> 
+				<li><a href="http://www..../contact">Contact</a></li> 
+				</ul> 
+
+			</div> 
+
+			<div id="main"> 
+			<%= yield %> 
+			</div> 
+		</div> 
+	</body> 
 </html>

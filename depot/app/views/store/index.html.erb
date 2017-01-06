@@ -1,0 +1,26 @@
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+	<% end %>
+
+<h2>Catalogue:</h2>
+	<table>
+		<% @products.each do |product| %>
+		<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+		      <td>
+		      <h3><%= product.title %></h3>
+		      <%= image_tag(product.image_url, class: 'list_image') %>
+		      </td>
+
+		      <td class="list_description">
+		      <dl>
+		      <dd><%= sanitize(product.description) %></dd>
+		      </dl>
+		      </td>
+
+		      <td class="price_line">
+		      <span class="price"><%= product.price %></span>
+		      </td>
+		</tr>
+		<% end %>
+	</table>
+<br />
