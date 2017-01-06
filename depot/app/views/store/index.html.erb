@@ -3,24 +3,17 @@
 	<% end %>
 
 <h2>Our products</h2>
-	<table>
-		<% @products.each do |product| %>
-		<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-		      <td>
-		      <h3><%= product.title %></h3>
-		      <%= image_tag(product.image_url, class: 'list_image') %>
-		      </td>
-
-		      <td class="list_description">
-		      <dl>
-		      <dd><%= sanitize(product.description) %></dd>
-		      </dl>
-		      </td>
-
-		      <td class="price_line">
-		      <span class="price"><%= product.price %></span>
-		      </td>
-		</tr>
-		<% end %>
-	</table>
-<br />
+<% cache ['store', Product.latest] do %> 
+	<% @products.each do |product| %> 
+		<% cache ['entry', product] do %> 
+			<div class="entry"> 
+			<%= image_tag(product.image_url) %> 
+			<h3><%= product.title %></h3> 
+			<%= sanitize(product.description) %> 
+			<div class="price_line"> 
+			<span class="price"><%= number_to_currency(product.price, unit: "₽", format: "%n %u") %></span> 
+			</div> 
+			</div> 
+		<% end %> 
+	<% end %> 
+<% end %>
