@@ -1,44 +1,48 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Raddit</title>
-    <%= csrf_meta_tags %>
+<!-- Эта страница является "шапкой" сайта. здесь хранятся элементы форматирования, которые выводятся на каждую из страниц в проекте RoR -->
+<!DOCTYPE html> <!-- указание на то, что веб-страница является страницей HTML5 -->
+<html> <!-- открытие контента страницы -->
+  <head> <!-- открытие раздела head, в котором хранится заголовок, метаинформация, а так же ссылки на подключённые яваскрипты и таблицы стилей -->
+    <title>Raddit</title> <!-- название сайта -->
+    <%= csrf_meta_tags %> <!-- генерирует метатеги csrf-param и csrf-token. Эти теги служат защитой от межсайтовой подделки запросов (Cross-site request forgery, CSRF) -->
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <!-- хелперы styleshhet_link_tag и javascript_include_tag генерируют ссылки на js-файлы и css-таблицы, обёрнутые в HTML-корректные теги (script и форматирование внутри тегов) -->
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <!-- вызов хелпера stylesheet_link_tag, который генерирует ссылки на CSS-таблицы, переданные в качестве параметров -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> <!-- вызов хелпера javascript_include_tag, который генерирует ссылки на js-файлы, переданные в качестве параметров  -->
+  </head> <!-- закрытие раздела head -->
 
-  <body>
-    <header class="navbar navbar-default" role="navigation">
-      <div class="navbar-inner">
-        <div class="container">
-          <div id="logo" class="navbar-brand"><%= link_to 'Raddit', root_path %></div>
-            <nav class="collapse navbar-collapse navbar-ex1-collapse">
-              <% if user_signed_in? %>
-              	<ul class="nav navbar-nav navbar-right">
-              		<li><%= link_to 'Submit link', new_link_path %></li>
-              		<li><%= link_to 'Account', edit_user_registration_path %></li> 
-              		<li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
-              	</ul>
-              <% else %>
-              	<ul class="nav navbar-nav navbar-right">
-              		<li><%= link_to 'Sign up', new_user_registration_path %></li>
-              		<li><%= link_to 'Sign in', new_user_session_path %></li>
-              	</ul>
-              <% end %>
-            </nav>
-        </div>
-      </div>
-    </header>
+  <body> <!-- открытие раздела body - основного раздела веб-страницы -->
+    <header class="navbar navbar-default" role="navigation"> <!-- открытие раздела header - верхней части сайта. в параметре class указан атрибут стиля Bootstrap (панель навигации), в параметре role - роль элемента, согласно ARIA  -->
+      <div class="navbar-inner"> <!-- открытие контейнера div, определяющего структуру навигационной панели. в параметре class указан атрибут стиля Bootstrap -->
+        <div class="container"> <!-- открытие контейнера div, в параметре class указан атрибут стиля Bootstrap -->
+          <div id="logo" class="navbar-brand"> <!-- открытие контейнера div, в параметре id указано уникальное имя, присваевоемое содержимому контейнера. в параметре class указан атрибут стиля Bootstrap -->
+            <%= link_to 'Raddit', root_path %> <!-- вызов хелпера link_to, создающего ссылку на раздел проекта, указанный после запятой. в данном случае ссылка создаётся на корневой раздел из файла /config/routes.rb. в кавычках указано название ссылки -->
+          </div> <!-- закрытие контейнера div, отвечающего за вид логотипа сайта -->
+            <nav class="collapse navbar-collapse navbar-ex1-collapse"> <!-- открытие раздела nav, который описывает структуру панели навигации -->
+              <% if user_signed_in? %> <!-- вызов встроенного хелпера devise, который возвращает true в случае, если пользователь вошёл на сайт под своими учётными данными. если этот хелпер вернул true, то выполняется участок кода до оператора else. смысл данной конструкции - вывод разных элементов меню для залогиненных и незалогиненных пользователей -->
+              	<ul class="nav navbar-nav navbar-right"> <!-- создание маркированного списка. в параметре class указан шаблон оформления Bootstrap -->
+              		<li><%= link_to 'Submit link', new_link_path %></li> <!-- создание элемента маркированного спика. внутри тега li вызов хелпера link_to с названием ссылки Submit link и путём на файл new.html.erb в папке app/views/links -->
+              		<li><%= link_to 'Account', edit_user_registration_path %></li> <!-- создание элемента маркированного списка. внутри тега li вызов хелпера link_to с названием ссылки Account и путём на файл edit.html.erb в папке app/views/devise/registrations -->
+              		<li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li> <!-- создание элемента маркированного списка. внутри тега li вызов хелпера link_to с названием ссылки Sign out, указанием на встроенный в devise механизм разлогинивания, а так же выбор REST метода delete. дело в том, что по умолчанию при таком запросе был бы передан REST-метод destroy, что привело бы к ошибке. требуется специально указать, что нужно использовать REST-метод delete -->
+              	</ul> <!-- закрытие тега, отвечающего за создание маркированного списка -->
+              <% else %> <!-- код ниже тега else будет выполнен только в том случае, если хелпер user_signed_in? вернёт false. смысл данной конструкции - показать разные элементы навигации залогиненным и незалогиненным пользователям -->
+              	<ul class="nav navbar-nav navbar-right"> <!-- создание маркированного списка. в параметре class указан шаблон оформления Bootstrap -->
+              		<li><%= link_to 'Sign up', new_user_registration_path %></li> <!-- создание элемента маркированного спика. внутри тега li вызов хелпера link_to с названием ссылки Sign up и путём на файл new.html.erb в папке app/views/devise/registrations -->
+              		<li><%= link_to 'Sign in', new_user_session_path %></li> <!-- создание элемента маркированного спика. внутри тега li вызов хелпера link_to с названием ссылки Sign in и путём на файл new.html.erb в папке app/views/devise/sessions -->
+              	</ul> <!-- закрытие тега, отвечающего за создание маркированного списка -->
+              <% end %> <!-- закрытие условного оператора if esle -->
+            </nav> <!-- закрытие раздела nav -->
+        </div> <!-- закрытие контейнера div -->
+      </div> <!-- закрытие контейнера div -->
+    </header> <!-- закрытие раздела header -->
 
-    <div id="main_content" class="container">
-      <% flash.each do |name, msg| %>
-        <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
-      <% end %>
+    <div id="main_content" class="container"> <!-- открытие контейнера с именем main_content и типом оформления bootstrap container -->
+      <% flash.each do |name, msg| %> <!-- вызов экшна flash. этот экшн показывает уведомление-вспышку на экране each do с параметрами name, msg означает, что экшн flash будет вызван столько раз, сколько произойдёт событие в цикле each do -->
+        <%= content_tag(:div, msg, class: "alert alert-#{name}") %> <!-- экшн content_tag оборачивает в HTML-код текст или значение переменной, которые передано в экшн. В данном случае, первый параметр :div указывает, каким именно html-тегом будет обёрнут контент, второй параметр msg - переменная, которая передаётся в экшн, третий параметр class: и название класса за ним - то, какой атрибут будет у тега div. в данном случае аттрибутом является class alert из bootstrap, причём благодаря переменной name, вставленной при помощи интерполяции строк, алерты могут быть разными  -->
+      <% end %> <!-- закрытие цикла each do -->
 
-      <div id="content" class="col-md9 center-block">
-        <%= yield %>
-      </div>
-    </div>
-  </body>
-</html>
+      <div id="content" class="col-md9 center-block"> <!-- открытие контейнера div, в параметре class указан атрибут стиля Bootstrap -->
+        <%= yield %> <!-- в параметр yield передаётся содержимое веб-страницы, с которой пользователь будет реально работать. всё, что на этой странице не yield - неизменные элементы дизайна сайта -->
+      </div> <!-- закрытие контейнера div -->
+    </div> <!-- закрытие контейнера div -->
+  </body> <!-- закрытие основного раздела веб-страницы -->
+</html> <!-- закрытие контента страницы -->
