@@ -1,37 +1,37 @@
-<%= form_for(product) do |f| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<%= form_for(product) do |f| %> <!-- вызов хелпера form_for, который позволяет пользователю создавать экземпляры сущности Product путём заполнения формы. элементы формы вызываются при помощи переменной f -->
+  <% if product.errors.any? %> <!-- вызов валидатора ошибок сущности product. концептуально - данный валидатор проверяет, верно ли заполнены поля в форме ниже, и если какие-то поля заполнены неверно, то выводятся сообщения об ошибках из блока ниже -->
+    <div id="error_explanation"> <!-- открытие контейнера div с уникальным id "error_explanation" -->
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2> <!-- метод pluralize приводит ко множественному числу параметры, указанные в скобках. синтаксис метода: pluralize(число, слово для перевода во множественное число). в данном случае в качестве числа указан метод product.errors.count, который подсчитывает количество ошибок при создании нового экземпляра сущности Product -->
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <ul> <!-- открытие маркированного списка -->
+      <% product.errors.full_messages.each do |message| %> <!-- при заполнении экземпляра сущности Product могут появиться ошибки. данная конструкция выполнит действие для каждой из ошибок, которая появится -->
+        <li><%= message %></li> <!-- вывод на экран полного сообщения об ошибке (благодаря full_messages) в цикле до. этот вывод заключён в тег элемента маркированного списка -->
+      <% end %> <!-- закрытие цикла do -->
+      </ul><!-- закрытие маркированного списка -->
+    </div> <!-- закрытие контейнера div с уникальным id "error_explanation" -->
+  <% end %> <!-- закрытие цикла if -->
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
+  <div class="field"> <!-- открытие контейнера div с классом css "field" -->
+    <%= f.label :title %> <!-- создание заголовка с названием Title. название взято из символа :title -->
+    <%= f.text_field :title %> <!-- создание текстового поля. данные из этого поля будут переданы в символ :title, а из него - в поле title таблицы Products -->
+  </div> <!-- закрытие контейнера div с классом css "field" -->
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+  <div class="field"> <!-- открытие контейнера div с классом css "field" -->
+    <%= f.label :description %> <!-- создание заголовка с названием Description. название взято из символа :description -->
+    <%= f.text_area :description, rows: 10, cols: 80 %> <!-- создание текстового поля. данные из этого поля будут переданы в символ :description, а из него - в поле description таблицы Products. параметр rows указывает высоту поля в строках, cols - ширину поля в пробелах -->
+  </div> <!-- закрытие контейнера div с классом css "field" -->
 
-  <div class="field">
-    <%= f.label :image_url %>
-    <%= f.text_field :image_url %>
-  </div>
+  <div class="field"> <!-- открытие контейнера div с классом css "field" -->
+    <%= f.label :image_url %> <!-- создание заголовка с названием Image Url. название взято из символа :image_url -->
+    <%= f.text_field :image_url %> <!-- создание текстового поля. данные из этого поля будут переданы в символ :image_url, а из него - в поле image_url таблицы Products -->
+  </div> <!-- закрытие контейнера div с классом css "field" -->
 
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
+  <div class="field"> <!-- открытие контейнера div с классом css "field" -->
+    <%= f.label :price %> <!-- создание заголовка с названием Price. название взято из символа :price -->
+    <%= f.text_field :price %> <!-- создание текстового поля. данные из этого поля будут переданы в символ :price, а из него - в поле price таблицы Products -->
+  </div> <!-- закрытие контейнера div с классом css "field" -->
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <div class="actions"> <!-- открытие контейнера div с классом css "actions" -->
+    <%= f.submit %> <!-- cоздание кнопки для создания экземпляра сущности Product. название кнопки "Create product" -->
+  </div> <!-- закрытие контейнера div с классом css "actions" -->
+<% end %> <!-- -->

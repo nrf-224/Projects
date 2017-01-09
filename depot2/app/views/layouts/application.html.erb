@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Depot2</title>
-    <%= csrf_meta_tags %>
+<!-- Эта страница является "шапкой" сайта. здесь хранятся элементы форматирования, которые выводятся на каждую из страниц в проекте RoR -->
+<!DOCTYPE html> <!-- указание на то, что веб-страница является страницей HTML5 -->
+<html> <!-- открытие контента страницы -->
+  <head> <!-- открытие раздела head, в котором хранится заголовок, метаинформация, а так же ссылки на подключённые яваскрипты и таблицы стилей -->
+    <title>The new Depot store</title> <!-- название сайта -->
+    <%= csrf_meta_tags %> <!-- генерирует метатеги csrf-param и csrf-token. Эти теги служат защитой от межсайтовой подделки запросов (Cross-site request forgery, CSRF) -->
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %> <!-- вызов хелпера stylesheet_link_tag, который генерирует ссылки на CSS-таблицы, переданные в качестве параметров -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> <!-- вызов хелпера javascript_include_tag, который генерирует ссылки на js-файлы, переданные в качестве параметров  -->
+  </head> <!-- закрытие раздела head -->
 
-  <body>
-    <%= yield %>
-  </body>
-</html>
+  <body class='<%= controller.controller_name %>'> <!-- открытие раздела body - основного раздела веб-страницы. разделу body присваивается класс, имя которого совпадает с названием контроллера  -->
+    <%= yield %> <!-- в параметр yield передаётся содержимое веб-страницы, с которой пользователь будет реально работать. всё, что на этой странице не yield - неизменные элементы дизайна сайта -->
+  </body> <!-- закрытие основного раздела веб-страницы -->
+</html> <!-- закрытие контента страницы -->

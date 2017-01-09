@@ -1,33 +1,28 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p> <!-- вывод на экран уведомления, если это необходимо -->
 
-<h1>Products</h1>
+<h1>Products</h1> <!-- создаём заголовок наверху страницы -->
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Image url</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <table> <!-- создаём таблицу -->
+    <% @products.each do |product| %> <!-- для каждого из экземпляров сущности Product будет сгенерирован код, указанный ниже -->
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>"> <!-- создаём строку таблицы. втроенный ruby-код позволяет чередовать стили оформления list_line_even и list_line_odd для чётных и нечётных строк соответственно -->
+      <td> <!-- создаём ячейку в строке таблицы -->
+        <%= image_tag(product.image_url, class: 'list_image') %> <!-- вызов хелпера image_tag, который генирирует валидный html-тег для картринки со следующими параметрами: ссылка берётся из атрибута image_url экземпляра сущности Product, класс CSS указан в одинарных кавычках -->
+      </td> <!-- закрытие кода, описывающего ячейку в строке таблицы -->
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <td><%= product.image_url %></td>
-        <td><%= product.price %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <td class="list_description"> <!-- создаём ячейку в строке таблицы -->
+        <dl> <!-- создаём описание продукта из таблицы -->
+          <dt><%= product.title %></dt> <!-- название продукта. в качестве названия берётся атрибут title экземпляра сущности Product -->
+          <dd><%= truncate(strip_tags(product.description), length: 80) %></dd> <!-- описание продукта. описание берётся из атрибута description экземпляра сущности Product. описание обёрнуто в два метода: strip_tags, который убирает все html-теги из описания, а так же truncate с параметром length: 80, который обрезает описание при показе до 80 символов -->
+        </dl> <!-- закрытие тегов, описывающих продукт -->
+      </td> <!-- закрытие кода, описывающего ячейку в строке таблицы -->
 
-<br>
-
-<%= link_to 'New Product', new_product_path %>
+      <td class="list_actions"> <!-- слздаём ячейку в строке таблицы. ячейка имеет класс list_actions -->
+        <%= link_to 'Show', product %><br/> <!-- метод link_to создаёт ссылку с названием Show, ведущую на файл страницу products/product.id -->
+        <%= link_to 'Edit', edit_product_path(product) %><br/> <!-- метод link_to создаёт ссылку с названием Edit, которая ведёт на файл edit.html.erb, при этом файл расположен по адресу products/product.id/edit -->
+        <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %> <!-- метод link_to создаёт ссылку с названием Destroy, которая уничтожает данный продукт, предварительно задав вопрос пользователю при помощи javaScript: Are you sure? -->
+      </td> <!-- закрытие кода, описывающего ячейку в строке таблицы -->
+    </tr> <!-- закрытие кода, описывающего строку таблицы-->
+    <% end %> <!-- закрытие цикла @products.each do |product| -->
+  </table> <!-- закрытие кода, описывающего таблицу -->
+<br /> <!-- перевод строки -->
+<%= link_to 'New product', new_product_path %> <!-- метод link_to создаёт ссылку с названием New product, ведущую на файл new.html.erb в папке app/models/products/ -->
