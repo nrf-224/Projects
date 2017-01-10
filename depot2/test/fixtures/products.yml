@@ -1,6 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# данный файл содержит тестовые данные для проверок модели app/models/products.rb
+#если не использовать эти данные, то для успешного прохождения тестов необходимо, чтобы в таблице Products базы данных была хотя бы одна запись
+#название файла соответствует названию таблицы в базе данных
 
-one:
+one: #имя пакета тестовых данных. поля в данном пакете генерируются автоматически при создании скаффолда, согласно указанным полям сущности
   title: MyString
   description: MyText
   image_url: MyString
@@ -11,3 +14,12 @@ two:
   description: MyText
   image_url: MyString
   price: 9.99
+
+ruby:
+  title: Programming Ruby 1.9
+  description:
+    Ruby is the fastest growing and most exciting dynamic
+    language out there. If you need to get working programs
+    delivered fast, you should add Ruby to your toolbox.
+  price: 49.50
+  image_url: ruby.png
