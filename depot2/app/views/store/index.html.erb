@@ -2,19 +2,23 @@
 
 <h1>Your Pragmatic Catalog</h1> <!-- заголовок ввверху страницы -->
 
-<% @products.each do |product| %> <!-- код, указанный ниже, выполнется для каждого экземпляра сущности Product, которая была передана в контроллере в переменную @products -->
-	<div class="entry"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
-		<%= image_tag(product.image_url) %> <!-- вызываем хелпер image_tag и передаём в него значение image_url из текущего экземпляра сущности Product -->
-		<!-- данный хелпер обораивает значение image_url из текущего экземпляра сущности Product в валидный img-тег -->
+<% cache @products do %> <!-- данный метод закэширует все экземпляры сущности Product, переданные в переменную класса @products -->
+	<% @products.each do |product| %> <!-- код, указанный ниже, выполнется для каждого экземпляра сущности Product, которая была передана в контроллере в переменную @products -->
+		<% cache product do %> <!-- данный метод закэширует конкретный экземпляр сущности Product -->
+			<div class="entry"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
+				<%= image_tag(product.image_url) %> <!-- вызываем хелпер image_tag и передаём в него значение image_url из текущего экземпляра сущности Product -->
+				<!-- данный хелпер обораивает значение image_url из текущего экземпляра сущности Product в валидный img-тег -->
 
-		<h3><%= product.title %></h3> <!-- выводим на экран значение title из текущего экземпляра сущности Product -->
+				<h3><%= product.title %></h3> <!-- выводим на экран значение title из текущего экземпляра сущности Product -->
 
-		<%= sanitize(product.description) %> <!-- выводим на экран значение description из текущего экземпляра сущности Product -->
-		<!-- хелпер sanitize убирает все html-теги, если они есть в значении description из текущего экземпляра сущности Product -->
+				<%= sanitize(product.description) %> <!-- выводим на экран значение description из текущего экземпляра сущности Product -->
+				<!-- хелпер sanitize убирает все html-теги, если они есть в значении description из текущего экземпляра сущности Product -->
 
-		<div class="price_line"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
-			<span class="price"><%= product.price %></span> <!-- выводим на экран значение price из текущего экземпляра сущности Product -->
-			<!-- значение обёрнуто в строку, в параметре class строки указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
-		</div> <!-- закрытие контейнера div -->
-	</div> <!-- закрытие контейнера div -->
-<% end %> <!-- окончание цикла each do для переменной класса @products -->
+				<div class="price_line"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
+					<span class="price"><%= number_to_currency(product.price) %></span> <!-- выводим на экран значение price из текущего экземпляра сущности Product. значение обёрнуто в экшн number_to_currency -->
+					<!-- значение обёрнуто в строку, в параметре class строки указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
+				</div> <!-- закрытие контейнера div -->
+			</div> <!-- закрытие контейнера div -->
+		<% end %> <!-- закрытие метода, который закэширует конкретный экземпляр сущности Product -->		
+	<% end %> <!-- окончание цикла each do для переменной класса @products -->
+<% end %><!-- закрытие метода, который закэширует все экземпляры сущности Product, переданные в переменную класса @products -->
