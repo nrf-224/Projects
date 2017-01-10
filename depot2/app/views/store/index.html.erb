@@ -1,17 +1,20 @@
 <p id="notice"><%= notice %></p> <!-- вывод на экран уведомления, если это необходимо -->
 
-<h1>Your Pragmatic Catalog</h1> <!-- -->
+<h1>Your Pragmatic Catalog</h1> <!-- заголовок ввверху страницы -->
 
-<% @products.each do |product| %> <!-- -->
-	<div class="entry"> <!-- -->
-		<%= image_tag(product.image_url) %> <!-- -->
+<% @products.each do |product| %> <!-- код, указанный ниже, выполнется для каждого экземпляра сущности Product, которая была передана в контроллере в переменную @products -->
+	<div class="entry"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
+		<%= image_tag(product.image_url) %> <!-- вызываем хелпер image_tag и передаём в него значение image_url из текущего экземпляра сущности Product -->
+		<!-- данный хелпер обораивает значение image_url из текущего экземпляра сущности Product в валидный img-тег -->
 
-		<h3><%= product.title %></h3> <!-- -->
+		<h3><%= product.title %></h3> <!-- выводим на экран значение title из текущего экземпляра сущности Product -->
 
-		<%= sanitize(product.description) %> <!-- -->
+		<%= sanitize(product.description) %> <!-- выводим на экран значение description из текущего экземпляра сущности Product -->
+		<!-- хелпер sanitize убирает все html-теги, если они есть в значении description из текущего экземпляра сущности Product -->
 
-		<div class="price_line"> <!-- -->
-			<span class="price"><%= product.price %></span> <!-- -->
-		</div> <!-- -->
-	</div> <!-- -->
-<% end %> <!-- -->
+		<div class="price_line"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
+			<span class="price"><%= product.price %></span> <!-- выводим на экран значение price из текущего экземпляра сущности Product -->
+			<!-- значение обёрнуто в строку, в параметре class строки указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
+		</div> <!-- закрытие контейнера div -->
+	</div> <!-- закрытие контейнера div -->
+<% end %> <!-- окончание цикла each do для переменной класса @products -->
