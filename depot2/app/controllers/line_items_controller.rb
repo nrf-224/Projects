@@ -27,7 +27,7 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     product = Product.find(params[:product_id]) #определяем локальную переменную product и присваиваем ей экземпляр класса Product, который найден по значению :product_id хеша params
-    @line_item = @cart.line_items.build(product: product) #определяем переменную класса @line_item и присваиваем ей значение, соответствующее значению текущего элемента корзины
+    @line_item = @cart.add_product(product) #определяем переменную класса @line_item и присваиваем ей значение, переданное методом add_product из app/models/cart.rb
 
     respond_to do |format|
       if @line_item.save
