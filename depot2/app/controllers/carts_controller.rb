@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart #метод rescue_from в данном случае перехватывает сообщения об ошибке Record Not Found из ActiveRecord
+  #после перехвата исполняется метод invalid_cart, описанный в данном контроллере в блоке private
 
   # GET /carts
   # GET /carts.json
@@ -54,9 +56,10 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    @cart.destroy
-    respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+    @cart.destroy if @cart.id == session[:cart_id] #удаляем корзину только в случае, если id корзины равен id корзины текущей сессии
+    session[:cart_id] = nil #после удаления корзины удаляем значение id корзины текущей сессии
+    respond_to do |format| #выводим на экран сообщение об удалении
+      format.html { redirect_to store_index_url, notice: 'Your cart is currently empty' } #перенаправляем на главную страницу магазина и информируем, что корзина пуста
       format.json { head :no_content }
     end
   end
@@ -70,5 +73,10 @@ class CartsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
       params.fetch(:cart, {})
+    end
+
+    def invalid_cart
+      logger.error "Attempt to access invalid cart #{params[:id]}" #записываем в лог сообщение о попытке доступа к корзине с неверным id. записываем, к какому id была попытка доступа
+      redirect_to store_index_url, notice: 'Invalid cart' #перенаправляем на страницу index.html.erb из папки app/views/store и выводим всплывающее сообщение 'Imvalid cart'
     end
 end

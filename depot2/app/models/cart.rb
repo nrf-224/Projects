@@ -14,4 +14,8 @@ class Cart < ApplicationRecord
 
       current_item #вызов переменной current_item, так как функционал по заполнению корзины переехал сюда целиком из метода create контроллера carts_controller.rb
     end #закрытие метода add_product
+
+    def total_price
+      line_items.to_a.sum { |item| item.total_price }
+    end
 end #закрытие описания валидаций и колбэков модели Cart

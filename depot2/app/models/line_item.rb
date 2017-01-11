@@ -4,4 +4,8 @@ class LineItem < ApplicationRecord
   #запись в таблице line_items не может существовать, если не существует соответствующих записей в таблицах products и carts
   belongs_to :product
   belongs_to :cart
+
+  def total_price
+    product.price * quantity
+  end
 end

@@ -23,10 +23,12 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect! #после отправки post-запроса происходит редирект на страницу new.html.erb из папки app/views/line_items и тест продолжается уже там
 
-    assert_select 'h2', 'Your Pragmatic Cart' #данный экшн assert_select ищет в сгенерированной html-странице элементы с тегом h2
+    assert_select 'h2', 'Your Cart' #данный экшн assert_select ищет в сгенерированной html-странице элементы с тегом h2
     #ожидаемый результат - будет найдена строка Your Pragmatic Cart, заключённая в теги h2
-    assert_select 'li', 'Programming Ruby 1.9' #данный экшн assert_select ищет в сгенерированной html-странице элементы с тегом li
-    #ожидаемый результат - будет найдена строка Programming Ruby 1.9, заключённая в теги li
+    assert_select 'td', '1 ×' #данный экшн assert_select ищет в сгенерированной html-странице элементы с тегом li
+    
+    assert_select 'td', 'Programming Ruby 1.9' #данный экшн assert_select ищет в сгенерированной html-странице элементы с тегом li
+    #ожидаемый результат - будет найдена строка 1 ×, заключённая в теги li. \u00D7 это юникод-символ ×
   end
 
   test "should show line_item" do
@@ -40,7 +42,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update line_item" do
-    patch line_item_url(@line_item), params: { line_item: { cart_id: @line_item.cart_id, product_id: @line_item.product_id } }
+    patch line_item_url(@line_item), params: { line_item: { product_id: @line_item.product_id } }
     assert_redirected_to line_item_url(@line_item)
   end
 
