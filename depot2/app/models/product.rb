@@ -1,4 +1,9 @@
 class Product < ApplicationRecord
+
+  has_many :line_items #данная запись означает, что экземпляр сущности Product может бытть связан с несколькими экземплярами сущности LineItem
+
+  before_destroy :ensure_not_referenced_by_any_line_item #перед удаленим экземпляра сущности Product будет выполняться проверка, описанная в методе, ensure_not_referenced_by_any_line_item
+
   #для каждого из критериев добавляется свой валидатор. при этом одни и те же поля могут быть проверены разными валидаторами
   validates :title, :description, :image_url, presence: true #добавляем валидацию, которая происходит при сохранении данных в таблицу Products
   #данная валидация проверяет, что поля title, description и image_url не пусты при нажатии кнопки Create Product
@@ -11,4 +16,17 @@ class Product < ApplicationRecord
     with: %r{\.(gif|jpg|png)\Z}i,
     message: 'must be a URL for GIF, JPG or PNG image.'
   }
-end
+  validates :title, length: {minimum: 10} #добавляем валидацию, которая происходит при сохранении данных в таблицу Products
+  #данная валидация проверяет, что в поле title записана строка, длина которой минимум 10 символов
+
+  private #метод, описанный ниже, будет приватным
+
+  def ensure_not_referenced_by_any_line_item #данный метод проверяет, что с текущим экземпляром сущности Product не связан ни один экземпляр сущности LineItem
+  #метод относится к классу хук-методов, которые вызываются на определённом этапе существования экземпляра сущности. В данном случае - на этапе удаления экземпляра сущности
+    unless line_items.empty? #до тех пор, пока существуют экземпляры сущности LineItem, связанные с текующим экземпляром сущности Product
+      errors.add(:base, 'Line Items present') #будет отображаться сообщение об этом
+      throw :abort #при этом удаление текущего экземпляра сущности Product будет отменяться
+    end #закрытие блока unless
+  end #закрытие описания метода
+  
+end #закрытие класса
