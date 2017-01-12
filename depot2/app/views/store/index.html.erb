@@ -17,7 +17,7 @@
 				<div class="price_line"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
 					<span class="price"><%= number_to_currency(product.price) %></span> <!-- выводим на экран значение price из текущего экземпляра сущности Product. значение обёрнуто в экшн number_to_currency -->
 					<!-- значение обёрнуто в строку, в параметре class строки указан атрибут стиля из файла store.scss в папке app/assets/stylesheets -->
-					<%= button_to 'Add to Cart', line_items_path(product_id: product) %> <!-- хелпер button_to добавит кнопку с названием Add to Cart, которая добавит текущий продукт в корзину -->
+					<%= button_to 'Add to Cart', line_items_path(product_id: product), remote: true %> %> <!-- хелпер button_to добавит кнопку с названием Add to Cart, которая добавит текущий продукт в корзину. параметр remote: true указывает на то, что нажатие на кнопку будет отправлять ajax-запрос к серверу, вместо запроса на обновление всей страницы -->
 				</div> <!-- закрытие контейнера div -->
 			</div> <!-- закрытие контейнера div -->
 		<% end %> <!-- закрытие метода, который закэширует конкретный экземпляр сущности Product -->		
