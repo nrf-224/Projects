@@ -1,3 +1,4 @@
+<% unless cart.line_items.empty? %>
 <h2>Your Cart</h2> <!-- Отображаем заголовок корзины -->
 <table> <!-- создаём таблицу -->
   <%= render(@cart.line_items) %> <!-- метод render вставит на страницу отрендендеренный партиал, указанный в скобках. В данном случае - _line.item.html.erb из папки app/views/line_items -->
@@ -9,3 +10,4 @@
 
 </table> <!-- закрытие описания таблицы -->
 <%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' } %> <!-- добавляем кнопку, позволяющую очистить корзину -->
+<% end %>

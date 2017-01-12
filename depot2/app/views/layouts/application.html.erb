@@ -16,7 +16,9 @@
     <div id="side"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла application.scss в папке app/assets/stylesheets -->
       <div id="cart"> <!-- открытие контейнера div, в параметре class указан атрибут стиля из файла application.scss в папке app/assets/stylesheets -->
         <% if @cart %> <!-- задаём условие, что корзина будет показана только в том случае, если в ней что-то есть (переменная @cart не пуста) -->
-          <%= render @cart %>  <!-- метод render вставит на страницу отрендендеренный партиал, указанный в скобках. В данном случае - _cart.item.html.erb из папки app/views/carts -->
+          <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+            <%= render @cart %>  <!-- метод render вставит на страницу отрендендеренный партиал, указанный в скобках. В данном случае - _cart.item.html.erb из папки app/views/carts -->
+          <% end %> <!-- закрытие цикла do -->
         <% end %> <!-- закрытие цикла if -->
       </div> <!-- закрытие контейнера div -->
 

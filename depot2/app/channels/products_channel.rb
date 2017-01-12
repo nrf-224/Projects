@@ -6,11 +6,14 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/rails5 for more book information.
 #---
-module ApplicationHelper
-  def hidden_div_if(condition, attributes = {}, &block)
-    if condition
-      attributes["style"] = "display: none"
-    end
-    content_tag("div", attributes, &block)
+# Be sure to restart your server when you modify this file. Action Cable
+# runs in a loop that does not support auto reloading.
+class ProductsChannel < ApplicationCable::Channel
+  def subscribed
+    stream_from "products"
+  end
+
+  def unsubscribed
+    # Any cleanup needed when channel is unsubscribed
   end
 end

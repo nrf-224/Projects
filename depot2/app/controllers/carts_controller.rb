@@ -59,7 +59,7 @@ class CartsController < ApplicationController
     @cart.destroy if @cart.id == session[:cart_id] #удаляем корзину только в случае, если id корзины равен id корзины текущей сессии
     session[:cart_id] = nil #после удаления корзины удаляем значение id корзины текущей сессии
     respond_to do |format| #выводим на экран сообщение об удалении
-      format.html { redirect_to store_index_url, notice: 'Your cart is currently empty' } #перенаправляем на главную страницу магазина и информируем, что корзина пуста
+      format.html { redirect_to store_index_url } #перенаправляем на главную страницу магазина и информируем, что корзина пуста
       format.json { head :no_content }
     end
   end
