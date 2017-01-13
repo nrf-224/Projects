@@ -2,7 +2,8 @@
 class LineItem < ApplicationRecord
   #ссылки belongs_to ниже означают, что столбцы в таблице line_items являются дочерними по отношению к столбцам таблиц products и carts
   #запись в таблице line_items не может существовать, если не существует соответствующих записей в таблицах products и carts
-  belongs_to :product
+  belongs_to :order, optional: true
+  belongs_to :product, optional: true
   belongs_to :cart
 
   def total_price

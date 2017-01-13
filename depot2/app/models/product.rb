@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
 
   has_many :line_items #данная запись означает, что экземпляр сущности Product может бытть связан с несколькими экземплярами сущности LineItem
+  has_many :orders, through: :line_items
 
   before_destroy :ensure_not_referenced_by_any_line_item #перед удаленим экземпляра сущности Product будет выполняться проверка, описанная в методе, ensure_not_referenced_by_any_line_item
 
