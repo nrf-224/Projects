@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linker</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <header>
+	<ul>
+		<li><%= link_to 'Linker', root_path %></li>
+		<li><%= link_to 'Add new link', new_link_path %></li>
+    </ul>
+  </header>
+
+    <%= yield %>
+  </body>
+</html>
