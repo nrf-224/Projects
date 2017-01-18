@@ -5,9 +5,11 @@
 <br />
     <% @links.each do |link| %>
       <h2><%= link_to link.title, link.url %></h2>
-      <%= link_to 'View comments', link %> | 
-      <%= link_to 'Edit', edit_link_path(link) %> | 
+      <%= link_to 'View comments', link %>
+      <% if link.user == current_user %> 
+       | <%= link_to 'Edit', edit_link_path(link) %> | 
       <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <h6>Posted at: <%= link.created_at %></h6>
+      <% end %>
+      <h6>Posted at: <%= link.created_at %> by: <%= link.user.email %></h6>
       <br />
     <% end %>
