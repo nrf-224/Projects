@@ -6,7 +6,7 @@
     <% @links.each do |link| %>
       <h2><%= link_to link.title, link.url %></h2>
       <%= link_to 'View comments', link %>
-      <% if link.user == current_user %> 
+      <% if link.user == current_user %> <!-- кнопки, указанные ниже, будут видны только тому, кто создал ссылку -->
        | <%= link_to 'Edit', edit_link_path(link) %> | 
       <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>

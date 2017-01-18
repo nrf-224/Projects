@@ -1,7 +1,7 @@
 1. Add link validation
 2. Add comments
 3. Add full user rights support (only author can delete own links, etc)
-4. Modify time display
+4. Modify time displaying
 5. Create tests
 
 DONE
