@@ -4,6 +4,12 @@
 <h2><%= link_to @link.title, @link.url %></h2>
 </p>
 
+  <% if @link.user == current_user %> 
+    <%= link_to 'Edit', edit_link_path(@link) %> |
+  <% end %>
+<%= link_to 'Back', links_path %>
+
+
 
 <h2>Comments</h2>
 <% @link.comments.each do |comment| %>
@@ -18,20 +24,23 @@
   </p>
 <% end %>
 
+<% if user_signed_in? %>
 <h2>Add a comment:</h2>
-<%= form_for([@link, @link.comments.build]) do |f| %>
-  <p>
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </p>
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+  <%= form_for([@link, @link.comments.build]) do |f| %>
+      <p>
+        <%= f.label :user_id %><br>
+        <%= f.text_field :user_id %>
+      </p>
+
+      <p>
+        <%= f.label :body %><br>
+        <%= f.text_area :body %>
+      </p>
+
+      <p>
+        <%= f.submit %>
+      </p>
+  <% end %>
+<% else %>
+Please <%= link_to 'sign in', new_user_session_path %> to leave a comment<br />
 <% end %>
- 
-<%= link_to 'Edit', edit_link_path(@link) %> |
-<%= link_to 'Back', links_path %>
