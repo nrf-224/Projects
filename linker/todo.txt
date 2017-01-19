@@ -1,11 +1,11 @@
 1. Add link validation
 2. Add comments
-3. Add full user rights support (only author can delete own links, etc)
-4. Modify time displaying
-5. Create tests
+3. Create tests
 
 DONE
 1. Add redirection to index after submitting URL
 2. Add flash notification after creating a new link
 3. Remove doubled flash notifications while signing in and signing out
 4. Add submitted by %username%
+5. Add full user rights support (only author can delete own links, etc)
+6. Modify time displaying
