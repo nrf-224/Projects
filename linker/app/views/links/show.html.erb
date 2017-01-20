@@ -7,9 +7,8 @@
 <h2>Comments</h2>
 <% @link.comments.each do |comment| %>
   <p>
-    <%= comment.body %>
-    Said <%= comment.user_id %> at <%= comment.created_at %>
-    <hr/>
+    <%= comment.body %><br/>
+    Said <%= comment.user_id %> <%= comment.created_at.strftime("%d.%m.%Y") %> at <%= comment.created_at.strftime("%H:%M:%S") %>
   </p>
 <% end %>
 
@@ -25,7 +24,6 @@
     </p>
   <% end %>
 <% else %>
-  <i>Please <%= link_to "sign in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to leave comments.</i>
+  Please <%= link_to "sign in", new_user_session_path %> or <%= link_to "register", new_user_registration_path %> to leave comments.
 <% end %>
-
-<%= link_to 'Back', links_path %>
+<br /><%= link_to 'Back', links_path %>
